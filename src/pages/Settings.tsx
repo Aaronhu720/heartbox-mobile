@@ -139,7 +139,7 @@ export default function SettingsPage() {
         <h3 className="font-medium text-sm">关于</h3>
         <div className="flex items-center justify-between">
           <span className="text-xs text-muted">版本</span>
-          <span className="text-xs">1.1.0</span>
+          <span className="text-xs">1.3.0</span>
         </div>
         <a
           href="/privacy-policy.html"
