@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>Half日记 - Store Screenshots</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #f0f0f0; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; padding: 40px; display: flex; gap: 40px; flex-wrap: wrap; }
+
+  .phone {
+    width: 360px; height: 640px;
+    background: #FAF6F1;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    position: relative;
+    flex-shrink: 0;
+  }
+  .phone .statusbar {
+    height: 28px; background: #FAF6F1; display: flex; align-items: center; justify-content: flex-end;
+    padding: 0 16px; font-size: 11px; color: #8A8580;
+  }
+  .phone .content { padding: 16px; height: calc(100% - 28px); overflow: hidden; }
+
+  /* Common */
+  .card { background: #fff; border: 1px solid #E8DED4; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+  .primary { color: #8B5E5A; }
+  .muted { color: #8A8580; }
+  .bg-primary { background: #8B5E5A; color: white; }
+  .serif { font-family: Georgia, "Noto Serif SC", serif; }
+  h1 { font-size: 20px; font-weight: 600; }
+  h2 { font-size: 16px; font-weight: 500; }
+  h3 { font-size: 14px; font-weight: 500; }
+  .text-xs { font-size: 11px; }
+  .text-sm { font-size: 13px; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .flex { display: flex; align-items: center; }
+  .gap-2 { gap: 8px; }
+  .gap-3 { gap: 12px; }
+  .btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; border: none; cursor: pointer; }
+  .icon-box { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+
+  /* Screenshot label */
+  .label-bar {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(transparent, rgba(139,94,90,0.9));
+    padding: 40px 20px 20px;
+    color: white; text-align: center;
+  }
+  .label-bar h2 { color: white; font-size: 18px; margin-bottom: 4px; }
+  .label-bar p { font-size: 12px; opacity: 0.9; }
+</style>
+</head>
+<body>
+
+<!-- Screenshot 1: Dashboard -->
+<div class="phone" id="ss1">
+  <div class="statusbar">9:41</div>
+  <div class="content">
+    <div style="margin-bottom: 12px;">
+      <h1 class="serif">aaronhu720，你好</h1>
+      <p class="text-xs muted" style="margin-top: 4px;">2026年5月12日 星期二</p>
+    </div>
+
+    <div class="grid-3" style="margin-bottom: 14px;">
+      <div class="card" style="padding: 10px;">
+        <div class="flex gap-2">
+          <div class="icon-box" style="background: #E8F0E4; color: #3D5E42;">✓</div>
+          <div><p class="text-xs muted">今日</p><p style="font-size: 12px; font-weight: 500;">已记录</p></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 10px;">
+        <div class="flex gap-2">
+          <div class="icon-box" style="background: #E0EBF5; color: #3B5998;">☺</div>
+          <div><p class="text-xs muted">心情</p><p style="font-size: 12px; font-weight: 500;">7.2/10</p></div>
+        </div>
+      </div>
+      <div class="card" style="padding: 10px;">
+        <div class="flex gap-2">
+          <div class="icon-box" style="background: rgba(139,94,90,0.1); color: #8B5E5A;">✉</div>
+          <div><p class="text-xs muted">信件</p><p style="font-size: 12px; font-weight: 500;">2 封</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex" style="justify-content: space-between; margin-bottom: 10px;">
+      <h2 class="serif">快捷操作</h2>
+      <button class="btn bg-primary" style="font-size: 12px;">写日记</button>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 14px;">
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: #E8F0E4; color: #3D5E42;">▦</div>
+        <span class="text-sm" style="font-weight: 500;">情绪日历</span>
+      </div>
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: #E0EBF5; color: #3B5998;">◠</div>
+        <span class="text-sm" style="font-weight: 500;">情绪趋势</span>
+      </div>
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: rgba(139,94,90,0.1); color: #8B5E5A;">✉</div>
+        <span class="text-sm" style="font-weight: 500;">延迟信件</span>
+      </div>
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: rgba(212,197,185,0.3); color: #8B5E5A;">♡</div>
+        <span class="text-sm" style="font-weight: 500;">AI 陪伴</span>
+      </div>
+    </div>
+
+    <!-- Ad cards -->
+    <div class="grid-2">
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: linear-gradient(135deg, #e0d4f5, #d5c8f0); font-size: 18px;">🔮</div>
+        <div><p class="text-sm" style="font-weight: 500;">塔罗牌</p><p class="text-xs muted">¥9.9/次</p></div>
+      </div>
+      <div class="card flex gap-2" style="padding: 10px;">
+        <div class="icon-box" style="background: linear-gradient(135deg, #fce4ec, #f8bbd0); font-size: 18px;">✨</div>
+        <div><p class="text-sm" style="font-weight: 500;">姓名测试</p><p class="text-xs muted">¥9.9/次</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="label-bar"><h2 class="serif">记录每一天的心情</h2><p>智能仪表盘，一目了然</p></div>
+</div>
+
+<!-- Screenshot 2: New Entry -->
+<div class="phone" id="ss2">
+  <div class="statusbar">9:41</div>
+  <div class="content">
+    <h1 class="serif" style="margin-bottom: 14px;">写日记</h1>
+
+    <div class="card" style="padding: 14px;">
+      <label class="text-sm" style="font-weight: 500; display: block; margin-bottom: 6px;">标题</label>
+      <div style="background: #FAF6F1; border: 1px solid #E8DED4; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #2D2A26; margin-bottom: 12px;">
+        今天和老朋友见面了
+      </div>
+
+      <label class="text-sm" style="font-weight: 500; display: block; margin-bottom: 6px;">正文</label>
+      <div style="background: #FAF6F1; border: 1px solid #E8DED4; border-radius: 8px; padding: 8px 12px; font-size: 13px; color: #2D2A26; min-height: 80px; margin-bottom: 14px;">
+        好久没见了，聊了很多以前的事情，感觉心里暖暖的...
+      </div>
+
+      <label class="text-sm" style="font-weight: 500; display: block; margin-bottom: 8px;">心情标签</label>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 14px;">
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #DBEAFE; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">💭</div>想念
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #FEE2E2; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">😢</div>痛苦
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #FEE2E2; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">😤</div>愤怒
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #D1FAE5; color: white; font-size: 11px; box-shadow: 0 2px 8px rgba(52,211,153,0.4); transform: scale(1.05); font-weight: 600;">
+          <div style="font-size: 18px; margin-bottom: 2px;">😌</div>释怀
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #FEF3C7; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">😔</div>后悔
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #E0E7FF; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">🧘</div>平静
+        </div>
+        <div style="text-align: center; padding: 8px 4px; border-radius: 10px; background: #EDE9FE; font-size: 11px;">
+          <div style="font-size: 18px; margin-bottom: 2px;">🙏</div>感恩
+        </div>
+      </div>
+
+      <label class="text-sm" style="font-weight: 500; display: block; margin-bottom: 4px;">
+        情绪评分：<span class="primary" style="font-size: 16px;">7</span> / 10
+      </label>
+      <div style="height: 6px; background: #E8DED4; border-radius: 3px; margin: 8px 0;">
+        <div style="height: 100%; width: 70%; background: #8B5E5A; border-radius: 3px;"></div>
+      </div>
+      <div class="flex text-xs muted" style="justify-content: space-between; margin-top: 4px;">
+        <span>😞 低落</span><span>😐 平静</span><span>😊 愉悦</span>
+      </div>
+    </div>
+  </div>
+  <div class="label-bar"><h2 class="serif">用文字疗愈心灵</h2><p>七种心情标签，精准捕捉情绪</p></div>
+</div>
+
+<!-- Screenshot 3: Tarot -->
+<div class="phone" id="ss3">
+  <div class="statusbar">9:41</div>
+  <div class="content">
+    <div style="text-align: center; margin-bottom: 14px;">
+      <div style="font-size: 36px; margin-bottom: 4px;">🔮</div>
+      <h1 class="serif">塔罗牌占卜</h1>
+      <p class="text-xs muted" style="margin-top: 4px;">倾听内心的声音，探索情绪的方向</p>
+    </div>
+
+    <!-- Reveal cards -->
+    <div class="card">
+      <div class="flex" style="justify-content: space-between; margin-bottom: 6px;">
+        <span class="text-xs muted" style="font-weight: 500;">过去</span>
+      </div>
+      <div class="flex gap-3">
+        <span style="font-size: 28px;">🌙</span>
+        <div>
+          <p style="font-size: 15px; font-weight: 600;" class="serif">女祭司</p>
+          <p class="text-xs muted" style="margin-top: 2px;">直觉、潜意识、内在智慧</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex" style="justify-content: space-between; margin-bottom: 6px;">
+        <span class="text-xs muted" style="font-weight: 500;">现在</span>
+        <span style="font-size: 9px; background: #FEF3C7; color: #92400E; padding: 2px 6px; border-radius: 10px;">逆位</span>
+      </div>
+      <div class="flex gap-3">
+        <span style="font-size: 28px; transform: rotate(180deg); display: inline-block;">⚔</span>
+        <div>
+          <p style="font-size: 15px; font-weight: 600;" class="serif">战车</p>
+          <p class="text-xs muted" style="margin-top: 2px;">失控、方向不明</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex" style="justify-content: space-between; margin-bottom: 6px;">
+        <span class="text-xs muted" style="font-weight: 500;">未来</span>
+      </div>
+      <div class="flex gap-3">
+        <span style="font-size: 28px;">⭐</span>
+        <div>
+          <p style="font-size: 15px; font-weight: 600;" class="serif">星星</p>
+          <p class="text-xs muted" style="margin-top: 2px;">希望、灵感、内心平静</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background: rgba(139,94,90,0.05); border-radius: 12px; padding: 12px; text-align: center; margin-top: 8px;">
+      <p class="text-xs muted">塔罗牌仅供娱乐和自我反思，不代表真实预测</p>
+    </div>
+  </div>
+  <div class="label-bar"><h2 class="serif">塔罗牌占卜</h2><p>过去、现在、未来，三牌阵解读</p></div>
+</div>
+
+<!-- Screenshot 4: Name Test Result -->
+<div class="phone" id="ss4">
+  <div class="statusbar">9:41</div>
+  <div class="content">
+    <div style="text-align: center; margin-bottom: 12px;">
+      <div style="font-size: 36px; margin-bottom: 4px;">✨</div>
+      <h1 class="serif">姓名测试</h1>
+    </div>
+
+    <!-- Result header -->
+    <div style="background: linear-gradient(135deg, rgba(139,94,90,0.1), rgba(212,197,185,0.3)); border: 1px solid #E8DED4; border-radius: 12px; padding: 16px; text-align: center; margin-bottom: 10px;">
+      <p class="text-xs muted">测试结果</p>
+      <p style="font-size: 22px; font-weight: 700; margin: 4px 0;" class="serif">小明</p>
+      <div class="flex" style="justify-content: center; gap: 16px; margin-top: 8px;">
+        <div><p style="font-size: 20px; font-weight: 700;" class="primary">88</p><p class="text-xs muted">综合评分</p></div>
+        <div style="width: 1px; height: 28px; background: #E8DED4;"></div>
+        <div><p style="font-size: 16px; font-weight: 700;">水</p><p class="text-xs muted">五行属性</p></div>
+        <div style="width: 1px; height: 28px; background: #E8DED4;"></div>
+        <div>
+          <div class="flex" style="gap: 4px;"><div style="width: 14px; height: 14px; border-radius: 50%; background: #87CEEB; border: 1px solid white;"></div><p class="text-sm" style="font-weight: 500;">天空蓝</p></div>
+          <p class="text-xs muted">幸运色</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="padding: 12px;">
+      <div class="flex gap-2" style="margin-bottom: 4px;"><span>🧠</span><h3 class="serif">性格解析</h3></div>
+      <p class="text-xs muted">你感性细腻，善于察觉他人情绪，富有同理心。内心世界丰富...</p>
+    </div>
+    <div class="card" style="padding: 12px;">
+      <div class="flex gap-2" style="margin-bottom: 4px;"><span>🍀</span><h3 class="serif">近期运势</h3></div>
+      <p class="text-xs muted">近期运势上升，适合尝试新事物。把握机会，你会有意想不到的收获。</p>
+    </div>
+    <div class="card" style="padding: 12px;">
+      <div class="flex gap-2" style="margin-bottom: 4px;"><span>💕</span><h3 class="serif">感情分析</h3></div>
+      <p class="text-xs muted">你在感情中真诚坦率，容易吸引同样真诚的人...</p>
+    </div>
+  </div>
+  <div class="label-bar"><h2 class="serif">姓名测试</h2><p>性格、运势、感情、事业全面解读</p></div>
+</div>
+
+<!-- Screenshot 5: Letters & Future Self -->
+<div class="phone" id="ss5">
+  <div class="statusbar">9:41</div>
+  <div class="content">
+    <h1 class="serif" style="margin-bottom: 14px;">延迟信件</h1>
+
+    <div class="card">
+      <div style="margin-bottom: 12px;">
+        <label class="text-sm" style="font-weight: 500;">保存方式</label>
+        <div class="flex" style="gap: 6px; margin-top: 8px;">
+          <div style="padding: 8px 12px; border-radius: 8px; font-size: 12px; background: #FAF6F1; border: 1px solid #E8DED4; color: #8A8580;">保存为私人日记</div>
+          <div style="padding: 8px 12px; border-radius: 8px; font-size: 12px; background: #8B5E5A; color: white;">设置未来发送</div>
+          <div style="padding: 8px 12px; border-radius: 8px; font-size: 12px; background: #FAF6F1; border: 1px solid #E8DED4; color: #8A8580;">写给未来的自己</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 10px;">
+        <label class="text-xs" style="display: block; margin-bottom: 4px;">收件人姓名</label>
+        <div style="background: #FAF6F1; border: 1px solid #E8DED4; border-radius: 8px; padding: 8px 12px; font-size: 13px;">妈妈</div>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label class="text-xs" style="display: block; margin-bottom: 4px;">发送方式</label>
+        <div class="flex" style="gap: 6px;">
+          <div style="padding: 6px 14px; border-radius: 8px; font-size: 12px; background: rgba(139,94,90,0.1); color: #8B5E5A; border: 1px solid rgba(139,94,90,0.3);">✉ 邮件</div>
+          <div style="padding: 6px 14px; border-radius: 8px; font-size: 12px; background: #FAF6F1; border: 1px solid #E8DED4; color: #8A8580;">✆ 短信</div>
+        </div>
+      </div>
+      <div style="margin-bottom: 10px;">
+        <label class="text-xs" style="display: block; margin-bottom: 4px;">收件人邮箱</label>
+        <div style="background: #FAF6F1; border: 1px solid #E8DED4; border-radius: 8px; padding: 8px 12px; font-size: 13px;">mama@email.com</div>
+      </div>
+      <div>
+        <label class="text-xs" style="display: block; margin-bottom: 4px;">计划发送日期</label>
+        <div style="background: #FAF6F1; border: 1px solid #E8DED4; border-radius: 8px; padding: 8px 12px; font-size: 13px;">2026-06-15 10:00</div>
+      </div>
+      <p class="text-xs muted" style="margin-top: 8px;">到达设定时间后，系统会提醒你确认是否发送，不会自动发送。</p>
+    </div>
+  </div>
+  <div class="label-bar"><h2 class="serif">延迟发送信件</h2><p>冷静之后再决定，邮件或短信发送</p></div>
+</div>
+
+</body>
+</html>

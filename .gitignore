@@ -1,0 +1,32 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.env
+.env.local
+
+# Android build outputs
+android/app/build/
+android/.gradle/
+android/build/
+android/capacitor-cordova-android-plugins/build/
+android/.idea/
+
+# iOS build outputs
+ios/App/Pods/
+ios/App/build/
+ios/App/App.xcworkspace/xcuserdata/
+ios/App/App.xcodeproj/xcuserdata/
+ios/DerivedData/
+
+# Keystore (sensitive)
+*.keystore
+*.jks
+
+# IDE
+.vscode/
+.idea/
+
+# Store assets HTML templates (keep output images)
+store-assets/output/*.html
+store-assets/output/*.cjs

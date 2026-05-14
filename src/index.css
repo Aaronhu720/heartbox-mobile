@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: #FAF6F1;
+  color: #2D2A26;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-overflow-scrolling: touch;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Serif SC", "STSong", "SimSun", serif;
+}
+
+input, textarea, select {
+  outline: none;
+  font-size: 16px; /* prevent iOS zoom on focus */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #8B5E5A;
+  box-shadow: 0 0 0 2px rgba(139, 94, 90, 0.15);
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #B89E99;
+  border-radius: 2px;
+}
+
+/* Safe area insets for notch devices */
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

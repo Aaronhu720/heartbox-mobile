@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Background color -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#FAF6F1" />
+        </shape>
+    </item>
+    <!-- Center heart icon -->
+    <item
+        android:gravity="center"
+        android:width="80dp"
+        android:height="80dp">
+        <vector
+            android:width="80dp"
+            android:height="80dp"
+            android:viewportWidth="80"
+            android:viewportHeight="80">
+            <path
+                android:fillColor="#8B5E5A"
+                android:pathData="M40,65 C40,65 18,50 18,35 C18,27 24,21 31,21 C36,21 39,24 40,28 C41,24 44,21 49,21 C56,21 62,27 62,35 C62,50 40,65 40,65z" />
+            <path
+                android:fillColor="#00000000"
+                android:strokeColor="#F5EDE6"
+                android:strokeWidth="1.5"
+                android:strokeLineCap="round"
+                android:pathData="M34,40 L42,32 L48,38" />
+            <path
+                android:fillColor="#00000000"
+                android:strokeColor="#F5EDE6"
+                android:strokeWidth="1.0"
+                android:strokeLineCap="round"
+                android:pathData="M31,46 L45,46" />
+            <path
+                android:fillColor="#00000000"
+                android:strokeColor="#F5EDE6"
+                android:strokeWidth="1.0"
+                android:strokeLineCap="round"
+                android:pathData="M33,51 L43,51" />
+        </vector>
+    </item>
+</layer-list>

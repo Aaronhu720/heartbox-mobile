@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #eee; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+  .feature {
+    width: 1024px; height: 500px;
+    background: linear-gradient(135deg, #FAF6F1 0%, #E8DED4 50%, #D4C5B9 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-family: Georgia, "Noto Serif SC", "PingFang SC", serif;
+    position: relative; overflow: hidden;
+  }
+  /* Decorative circles */
+  .feature::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(139, 94, 90, 0.08);
+  }
+  .feature::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 250px; height: 250px; border-radius: 50%;
+    background: rgba(139, 94, 90, 0.06);
+  }
+  .center {
+    text-align: center; z-index: 1;
+  }
+  .heart {
+    font-size: 72px; margin-bottom: 16px;
+    filter: drop-shadow(0 4px 12px rgba(139, 94, 90, 0.3));
+  }
+  .title {
+    font-size: 56px; font-weight: 700; color: #8B5E5A;
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+  .subtitle {
+    font-size: 22px; color: #8A8580; font-weight: 400;
+    letter-spacing: 4px;
+  }
+  .tags {
+    margin-top: 24px; display: flex; gap: 12px; justify-content: center;
+  }
+  .tag {
+    padding: 6px 16px; border-radius: 20px; font-size: 14px;
+    font-family: -apple-system, "PingFang SC", sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="feature">
+  <div class="center">
+    <div class="heart">💝</div>
+    <div class="title">Half日记</div>
+    <div class="subtitle">写给自己的情感疗愈日记</div>
+    <div class="tags">
+      <div class="tag" style="background: rgba(96,165,250,0.15); color: #3B82F6;">💭 情绪日记</div>
+      <div class="tag" style="background: rgba(139,94,90,0.12); color: #8B5E5A;">♡ AI陪伴</div>
+      <div class="tag" style="background: rgba(52,211,153,0.15); color: #059669;">✉ 延迟信件</div>
+      <div class="tag" style="background: rgba(167,139,250,0.15); color: #7C3AED;">🔮 塔罗占卜</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
