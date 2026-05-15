@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Half日记 - 你的情感疗愈日记</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      color: #333;
+      background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 30%, #f3e8ff 70%, #ede9fe 100%);
+      min-height: 100vh;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px; text-align: center; }
+    .logo { font-size: 64px; margin-bottom: 16px; }
+    h1 { font-size: 32px; font-weight: 700; color: #7c3aed; margin-bottom: 8px; }
+    .tagline { font-size: 18px; color: #6b7280; margin-bottom: 48px; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+      text-align: left;
+    }
+    .feature {
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .feature .icon { font-size: 28px; margin-bottom: 8px; }
+    .feature h3 { font-size: 16px; font-weight: 600; color: #7c3aed; margin-bottom: 6px; }
+    .feature p { font-size: 13px; color: #6b7280; line-height: 1.5; }
+    .download-section { margin-bottom: 48px; }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: #7c3aed;
+      color: white;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+    }
+    .download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(124,58,237,0.4); }
+    .coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      background: rgba(255,255,255,0.6);
+      color: #9ca3af;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      border: 2px dashed #d1d5db;
+      margin-left: 12px;
+    }
+    footer {
+      padding: 32px 0;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    footer a { color: #7c3aed; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    .footer-links { margin-bottom: 12px; }
+    .footer-links a { margin: 0 12px; }
+    @media (max-width: 480px) {
+      h1 { font-size: 24px; }
+      .tagline { font-size: 15px; }
+      .coming-soon { margin-left: 0; margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">🌸</div>
+    <h1>Half日记</h1>
+    <p class="tagline">记录情绪，疗愈心灵，遇见更好的自己</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="icon">📝</div>
+        <h3>情绪日记</h3>
+        <p>用文字记录每天的心情，7种心情标签 + 10级情绪评分</p>
+      </div>
+      <div class="feature">
+        <div class="icon">📅</div>
+        <h3>情绪日历</h3>
+        <p>用颜色展示每日心情，一眼看见自己的情绪变化</p>
+      </div>
+      <div class="feature">
+        <div class="icon">💬</div>
+        <h3>AI陪伴</h3>
+        <p>智能对话陪你聊天，温暖你每一个需要倾诉的时刻</p>
+      </div>
+      <div class="feature">
+        <div class="icon">✉️</div>
+        <h3>延迟信件</h3>
+        <p>写给未来的自己，在特别的日子收到过去的温暖</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🔮</div>
+        <h3>塔罗占卜</h3>
+        <p>22张大阿卡纳牌，为你的困惑带来启示</p>
+      </div>
+      <div class="feature">
+        <div class="icon">🫂</div>
+        <h3>疗愈空间</h3>
+        <p>专属的心灵疗愈角落，温暖语录陪伴每一天</p>
+      </div>
+    </div>
+
+    <div class="download-section">
+      <a href="https://play.google.com/store/apps/details?id=com.halfdiary.app" class="download-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.609 1.814L13.792 12 3.61 22.186a2.37 2.37 0 0 1-.088-.653V2.467c0-.226.03-.445.088-.653zm10.89 10.893l2.302 2.302-10.937 6.333 8.635-8.635zm3.199-1.707l2.549 1.478a1.487 1.487 0 0 1 0 2.545l-2.55 1.477-2.55-2.55 2.55-2.95zM5.864 1.151L16.8 7.484l-2.302 2.302-8.635-8.635z"/></svg>
+        Google Play 下载
+      </a>
+      <span class="coming-soon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        iOS 即将上线
+      </span>
+    </div>
+
+    <footer>
+      <div class="footer-links">
+        <a href="/privacy-policy.html">隐私政策</a>
+        <a href="mailto:aaronhu720@gmail.com">联系我们</a>
+      </div>
+      <p>&copy; 2026 Half日记 | JONIE HOLDING LIMITED</p>
+    </footer>
+  </div>
+</body>
+</html>
