@@ -4,7 +4,7 @@ import {
   getMembership, purchaseMembership, purchaseSmsCredit,
   PRICING, MEMBER_FEATURES, type MembershipPlan,
 } from '@/lib/membership';
-import { purchaseProduct } from '@/lib/payment';
+import { purchaseProduct, useNativeIAP, type ProductId } from '@/lib/payment';
 
 export default function MembershipPage() {
   const navigate = useNavigate();
@@ -14,34 +14,44 @@ export default function MembershipPage() {
   const [msg, setMsg] = useState('');
 
   const isActive = membership.plan !== 'free' && membership.expiresAt && new Date(membership.expiresAt) > new Date();
+  const nativeIAP = useNativeIAP();
 
-  async function handlePurchase() {
+  async function handleNativePurchase(productId: ProductId) {
     setPurchasing(true);
     setMsg('');
-    const productId = selectedPlan === 'monthly' ? 'halfdiary_monthly' : 'halfdiary_yearly';
-    const payment = await purchaseProduct(productId as any);
-    if (payment.success) {
-      const state = purchaseMembership(selectedPlan);
-      setMembership(state);
-      setMsg('开通成功！');
-    } else {
-      setMsg(payment.error || '支付失败，请重试');
+    try {
+      const result = await purchaseProduct(productId);
+      if (result.success) {
+        if (productId === 'halfdiary_monthly') purchaseMembership('monthly');
+        else if (productId === 'halfdiary_yearly') purchaseMembership('yearly');
+        else if (productId === 'halfdiary_sms') purchaseSmsCredit();
+        setMembership(getMembership());
+        setMsg('购买成功！');
+      } else {
+        setMsg(result.error || '购买失败');
+      }
+    } catch {
+      setMsg('购买失败，请重试');
+    } finally {
+      setPurchasing(false);
     }
-    setPurchasing(false);
   }
 
-  async function handleBuySms() {
-    setPurchasing(true);
-    setMsg('');
-    const payment = await purchaseProduct('halfdiary_sms');
-    if (payment.success) {
-      const result = purchaseSmsCredit();
-      setMembership(getMembership());
-      setMsg(`购买成功！当前短信余额：${result.credits} 条`);
+  function handlePurchase() {
+    const productId = selectedPlan === 'monthly' ? 'halfdiary_monthly' : 'halfdiary_yearly';
+    if (nativeIAP) {
+      handleNativePurchase(productId as ProductId);
     } else {
-      setMsg(payment.error || '支付失败，请重试');
+      navigate(`/payment?product=${productId}`);
     }
-    setPurchasing(false);
+  }
+
+  function handleBuySms() {
+    if (nativeIAP) {
+      handleNativePurchase('halfdiary_sms');
+    } else {
+      navigate('/payment?product=halfdiary_sms');
+    }
   }
 
   return (

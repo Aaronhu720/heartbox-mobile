@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getNameTestCredits, purchaseNameTestCredit, useNameTestCredit, PRICING } from '@/lib/membership';
-import { purchaseProduct } from '@/lib/payment';
+import { purchaseProduct, useNativeIAP } from '@/lib/payment';
 import { callDoubaoAI, getAiConfig } from '@/lib/ai';
 
 function nameHash(name: string): number {
@@ -138,19 +138,28 @@ export default function NameTestPage() {
   const [msg, setMsg] = useState('');
 
   const canSubmit = myName.trim().length >= 2 && partnerName.trim().length >= 2 && !analyzing && credits > 0;
+  const nativeIAP = useNativeIAP();
 
   async function handleBuyCredit() {
-    setPurchasing(true);
-    setMsg('');
-    const payment = await purchaseProduct('halfdiary_nametest');
-    if (payment.success) {
-      const res = purchaseNameTestCredit();
-      setCredits(res.credits);
-      setMsg('购买成功！');
+    if (nativeIAP) {
+      setPurchasing(true);
+      try {
+        const result = await purchaseProduct('halfdiary_nametest');
+        if (result.success) {
+          purchaseNameTestCredit();
+          setCredits(getNameTestCredits());
+          setMsg('购买成功！');
+        } else {
+          setMsg(result.error || '购买失败');
+        }
+      } catch {
+        setMsg('购买失败，请重试');
+      } finally {
+        setPurchasing(false);
+      }
     } else {
-      setMsg(payment.error || '支付失败，请重试');
+      navigate('/payment?product=halfdiary_nametest');
     }
-    setPurchasing(false);
   }
 
   async function handleAnalyze() {

@@ -18,6 +18,7 @@ import Membership from '@/pages/Membership';
 import Tarot from '@/pages/Tarot';
 import NameTest from '@/pages/NameTest';
 import Healing from '@/pages/Healing';
+import Payment from '@/pages/Payment';
 
 function ProtectedLayout() {
   const { userId, isLoading } = useAuth();
@@ -66,6 +67,7 @@ export default function App() {
             <Route path="/healing" element={<Healing />} />
             <Route path="/tarot" element={<Tarot />} />
             <Route path="/name-test" element={<NameTest />} />
+            <Route path="/payment" element={<Payment />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

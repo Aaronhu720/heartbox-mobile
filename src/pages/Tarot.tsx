@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTarotCredits, purchaseTarotCredit, useTarotCredit, PRICING } from '@/lib/membership';
-import { purchaseProduct } from '@/lib/payment';
+import { purchaseProduct, useNativeIAP } from '@/lib/payment';
 import { callDoubaoAI, getAiConfig } from '@/lib/ai';
 
 const TAROT_CARDS = [
@@ -42,18 +42,28 @@ export default function TarotPage() {
   const [aiLoading, setAiLoading] = useState(false);
   const [aiError, setAiError] = useState('');
 
+  const nativeIAP = useNativeIAP();
+
   async function handleBuyCredit() {
-    setPurchasing(true);
-    setMsg('');
-    const payment = await purchaseProduct('halfdiary_tarot');
-    if (payment.success) {
-      const result = purchaseTarotCredit();
-      setCredits(result.credits);
-      setMsg('购买成功！');
+    if (nativeIAP) {
+      setPurchasing(true);
+      try {
+        const result = await purchaseProduct('halfdiary_tarot');
+        if (result.success) {
+          purchaseTarotCredit();
+          setCredits(getTarotCredits());
+          setMsg('购买成功！');
+        } else {
+          setMsg(result.error || '购买失败');
+        }
+      } catch {
+        setMsg('购买失败，请重试');
+      } finally {
+        setPurchasing(false);
+      }
     } else {
-      setMsg(payment.error || '支付失败，请重试');
+      navigate('/payment?product=halfdiary_tarot');
     }
-    setPurchasing(false);
   }
 
   function startReading() {

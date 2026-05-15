@@ -23,8 +23,8 @@ export interface MembershipState {
 
 export const PRICING = {
   monthly: { price: 19.9, label: '月度会员', period: '月' },
-  yearly: { price: 199, label: '年度会员', period: '年', saving: '8.3折' },
-  sms: { price: 0.99, label: '延迟短信', limit: 500 },
+  yearly: { price: 199, label: '年度会员', period: '年', saving: '17% OFF' },
+  sms: { price: 2.9, label: '延迟短信', limit: 500 },
   tarot: { price: 9.9, label: '塔罗牌占卜' },
   nametest: { price: 9.9, label: '姓名测试' },
 } as const;
