@@ -25,6 +25,7 @@ async function getDb(): Promise<Database> {
       id TEXT PRIMARY KEY,
       pin_hash TEXT NOT NULL,
       email TEXT DEFAULT '',
+      phone TEXT DEFAULT '',
       created_at TEXT DEFAULT (datetime('now'))
     );
 
@@ -74,6 +75,12 @@ async function getDb(): Promise<Database> {
       created_at TEXT DEFAULT (datetime('now'))
     );
   `);
+
+  try {
+    db.run('ALTER TABLE user ADD COLUMN phone TEXT DEFAULT ""');
+  } catch {
+    // column already exists
+  }
 
   saveDb();
   return db;
@@ -132,6 +139,35 @@ export async function changePin(currentPin: string, newPin: string): Promise<boo
   d.run('UPDATE user SET pin_hash = ? WHERE id = ?', [newHash, userId]);
   saveDb();
   return true;
+}
+
+export async function createUserByPhone(phone: string): Promise<string> {
+  const d = await getDb();
+  const existing = d.exec('SELECT id FROM user WHERE phone = ?', [phone]);
+  if (existing.length > 0 && existing[0].values.length > 0) {
+    return existing[0].values[0][0] as string;
+  }
+
+  const anyUser = d.exec('SELECT id FROM user LIMIT 1');
+  if (anyUser.length > 0 && anyUser[0].values.length > 0) {
+    const uid = anyUser[0].values[0][0] as string;
+    d.run('UPDATE user SET phone = ? WHERE id = ?', [phone, uid]);
+    saveDb();
+    return uid;
+  }
+
+  const id = generateId();
+  const pinHash = await hashPin(phone.slice(-6));
+  d.run('INSERT INTO user (id, pin_hash, phone) VALUES (?, ?, ?)', [id, pinHash, phone]);
+  saveDb();
+  return id;
+}
+
+export async function getUserPhone(): Promise<string> {
+  const d = await getDb();
+  const result = d.exec('SELECT phone FROM user LIMIT 1');
+  if (result.length === 0 || result[0].values.length === 0) return '';
+  return (result[0].values[0][0] as string) || '';
 }
 
 export async function getUserEmail(): Promise<string> {

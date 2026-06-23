@@ -16,20 +16,12 @@ export default function LandingPage() {
       <header className="sticky top-0 z-50 bg-card/80 backdrop-blur-sm border-b border-border safe-top">
         <div className="px-5 py-3 flex items-center justify-between">
           <h1 className="text-xl font-semibold text-primary tracking-wide font-serif">Half日记</h1>
-          <div className="flex gap-2">
-            <Link
-              to="/login"
-              className="px-3 py-1.5 text-sm text-primary border border-primary rounded-lg"
-            >
-              登录
-            </Link>
-            <Link
-              to="/register"
-              className="px-3 py-1.5 text-sm bg-primary text-white rounded-lg"
-            >
-              注册
-            </Link>
-          </div>
+          <Link
+            to="/login"
+            className="px-4 py-1.5 text-sm bg-primary text-white rounded-lg"
+          >
+            登录 / 注册
+          </Link>
         </div>
       </header>
 

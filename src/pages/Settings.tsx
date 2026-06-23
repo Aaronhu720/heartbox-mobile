@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
-import { getUserEmail, changePin, setPrivacyLock, exportAllData, deleteAccount } from '@/lib/db';
+import { getUserEmail, getUserPhone, changePin, setPrivacyLock, exportAllData, deleteAccount } from '@/lib/db';
 import { isMember, getMembership } from '@/lib/membership';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
   const { userId, logout } = useAuth();
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -25,6 +26,7 @@ export default function SettingsPage() {
 
   useEffect(() => {
     getUserEmail().then(setEmail);
+    getUserPhone().then(setPhone);
   }, []);
 
   async function handlePasswordChange(e: React.FormEvent) {
@@ -77,7 +79,9 @@ export default function SettingsPage() {
 
       <div className="bg-card rounded-xl border border-border p-4">
         <h3 className="font-medium text-sm mb-2">账号信息</h3>
-        <p className="text-xs text-muted">邮箱：{email || '未设置'}</p>
+        {phone && <p className="text-xs text-muted">手机号：{phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}</p>}
+        {email && <p className="text-xs text-muted mt-1">邮箱：{email}</p>}
+        {!phone && !email && <p className="text-xs text-muted">未绑定手机号</p>}
         <p className="text-xs text-muted mt-1">数据存储：仅本地设备</p>
       </div>
 
