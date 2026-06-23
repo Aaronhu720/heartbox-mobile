@@ -101,11 +101,11 @@ export async function hasUser(): Promise<boolean> {
   return result.length > 0 && result[0].values[0][0] as number > 0;
 }
 
-export async function createUser(pin: string, email: string = ''): Promise<string> {
+export async function createUser(pin: string, phone: string = ''): Promise<string> {
   const d = await getDb();
   const id = generateId();
   const pinHash = await hashPin(pin);
-  d.run('INSERT INTO user (id, pin_hash, email) VALUES (?, ?, ?)', [id, pinHash, email]);
+  d.run('INSERT INTO user (id, pin_hash, phone) VALUES (?, ?, ?)', [id, pinHash, phone]);
   saveDb();
   return id;
 }
@@ -139,28 +139,6 @@ export async function changePin(currentPin: string, newPin: string): Promise<boo
   d.run('UPDATE user SET pin_hash = ? WHERE id = ?', [newHash, userId]);
   saveDb();
   return true;
-}
-
-export async function createUserByPhone(phone: string): Promise<string> {
-  const d = await getDb();
-  const existing = d.exec('SELECT id FROM user WHERE phone = ?', [phone]);
-  if (existing.length > 0 && existing[0].values.length > 0) {
-    return existing[0].values[0][0] as string;
-  }
-
-  const anyUser = d.exec('SELECT id FROM user LIMIT 1');
-  if (anyUser.length > 0 && anyUser[0].values.length > 0) {
-    const uid = anyUser[0].values[0][0] as string;
-    d.run('UPDATE user SET phone = ? WHERE id = ?', [phone, uid]);
-    saveDb();
-    return uid;
-  }
-
-  const id = generateId();
-  const pinHash = await hashPin(phone.slice(-6));
-  d.run('INSERT INTO user (id, pin_hash, phone) VALUES (?, ?, ?)', [id, pinHash, phone]);
-  saveDb();
-  return id;
 }
 
 export async function getUserPhone(): Promise<string> {
