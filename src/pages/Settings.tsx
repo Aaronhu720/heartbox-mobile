@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
-import { getUserEmail, getUserPhone, changePin, setPrivacyLock, exportAllData, deleteAccount } from '@/lib/db';
+import { changePin, setPrivacyLock, exportAllData, deleteAccount } from '@/lib/db';
 import { isMember, getMembership } from '@/lib/membership';
 
 export default function SettingsPage() {
   const navigate = useNavigate();
-  const { userId, logout } = useAuth();
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
+  const { userId, nickname, updateNickname, logout } = useAuth();
+  const [editingNickname, setEditingNickname] = useState(false);
+  const [nicknameInput, setNicknameInput] = useState('');
 
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -25,9 +25,8 @@ export default function SettingsPage() {
   const [deleteErr, setDeleteErr] = useState('');
 
   useEffect(() => {
-    getUserEmail().then(setEmail);
-    getUserPhone().then(setPhone);
-  }, []);
+    setNicknameInput(nickname);
+  }, [nickname]);
 
   async function handlePasswordChange(e: React.FormEvent) {
     e.preventDefault();
@@ -79,9 +78,30 @@ export default function SettingsPage() {
 
       <div className="bg-card rounded-xl border border-border p-4">
         <h3 className="font-medium text-sm mb-2">账号信息</h3>
-        {phone && <p className="text-xs text-muted">手机号：{phone.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2')}</p>}
-        {email && <p className="text-xs text-muted mt-1">邮箱：{email}</p>}
-        {!phone && !email && <p className="text-xs text-muted">未绑定手机号</p>}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted">昵称：</span>
+          {editingNickname ? (
+            <div className="flex items-center gap-2 flex-1">
+              <input
+                type="text"
+                value={nicknameInput}
+                onChange={(e) => setNicknameInput(e.target.value)}
+                className="flex-1 px-2 py-1 border border-border rounded-lg bg-background text-sm"
+                maxLength={20}
+                autoFocus
+              />
+              <button
+                onClick={async () => { await updateNickname(nicknameInput); setEditingNickname(false); }}
+                className="text-xs text-primary"
+              >保存</button>
+            </div>
+          ) : (
+            <>
+              <span className="text-xs">{nickname || '未设置'}</span>
+              <button onClick={() => setEditingNickname(true)} className="text-xs text-primary">修改</button>
+            </>
+          )}
+        </div>
         <p className="text-xs text-muted mt-1">数据存储：仅本地设备</p>
       </div>
 

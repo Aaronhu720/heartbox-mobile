@@ -5,7 +5,6 @@ import { useAuth } from '@/lib/AuthContext';
 export default function RegisterPage() {
   const navigate = useNavigate();
   const { register } = useAuth();
-  const [phone, setPhone] = useState('');
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
   const [error, setError] = useState('');
@@ -15,10 +14,6 @@ export default function RegisterPage() {
     e.preventDefault();
     setError('');
 
-    if (!/^1[3-9]\d{9}$/.test(phone)) {
-      setError('请输入正确的手机号');
-      return;
-    }
     if (pin.length < 4) {
       setError('密码至少4位');
       return;
@@ -29,7 +24,7 @@ export default function RegisterPage() {
     }
 
     setLoading(true);
-    await register(pin, phone);
+    await register(pin);
     setLoading(false);
     navigate('/dashboard');
   }
@@ -38,8 +33,8 @@ export default function RegisterPage() {
     <div className="min-h-screen flex flex-col items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold text-primary font-serif mb-2">创建账号</h1>
-          <p className="text-sm text-muted">所有日记数据仅保存在你的设备上</p>
+          <h1 className="text-2xl font-semibold text-primary font-serif mb-2">开始使用</h1>
+          <p className="text-sm text-muted">无需注册，设置一个密码即可</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -48,28 +43,16 @@ export default function RegisterPage() {
           )}
 
           <div>
-            <label className="block text-sm font-medium mb-1">手机号</label>
-            <input
-              type="tel"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value.replace(/\D/g, '').slice(0, 11))}
-              className="w-full px-4 py-3 border border-border rounded-xl bg-card text-base"
-              placeholder="请输入手机号"
-              required
-              autoFocus
-            />
-          </div>
-
-          <div>
             <label className="block text-sm font-medium mb-1">设置密码</label>
             <input
               type="password"
               value={pin}
               onChange={(e) => setPin(e.target.value)}
               className="w-full px-4 py-3 border border-border rounded-xl bg-card text-base"
-              placeholder="至少4位"
+              placeholder="至少4位，用于保护你的日记"
               required
               minLength={4}
+              autoFocus
             />
           </div>
 
@@ -91,8 +74,12 @@ export default function RegisterPage() {
             disabled={loading}
             className="w-full py-3 bg-primary text-white rounded-xl text-base disabled:opacity-50"
           >
-            {loading ? '注册中...' : '开始使用'}
+            {loading ? '创建中...' : '开始记录'}
           </button>
+
+          <p className="text-center text-xs text-muted">
+            不收集任何个人信息，所有数据仅存在你的设备上
+          </p>
         </form>
 
         <p className="text-center text-sm text-muted mt-6">

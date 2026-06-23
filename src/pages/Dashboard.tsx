@@ -1,31 +1,31 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
-import { getEntries, getLetters, getUserEmail, type DiaryEntry } from '@/lib/db';
+import { getEntries, getLetters, type DiaryEntry } from '@/lib/db';
 import { MOOD_TAGS } from '@/lib/safety';
 import AdBanner from '@/components/AdBanner';
 import DailyQuoteCard from '@/components/DailyQuoteCard';
 import { isMember } from '@/lib/membership';
 
 export default function DashboardPage() {
-  const { userId } = useAuth();
+  const { userId, nickname, updateNickname } = useAuth();
   const [entries, setEntries] = useState<DiaryEntry[]>([]);
   const [pendingCount, setPendingCount] = useState(0);
   const [todayEntry, setTodayEntry] = useState<DiaryEntry | null>(null);
   const [loading, setLoading] = useState(true);
-  const [userName, setUserName] = useState('');
+  const [showNicknamePrompt, setShowNicknamePrompt] = useState(false);
+  const [nicknameInput, setNicknameInput] = useState('');
 
   useEffect(() => {
     if (!userId) return;
     async function load() {
-      const [{ entries: e }, letters, email] = await Promise.all([
+      const [{ entries: e }, letters] = await Promise.all([
         getEntries(userId!, { limit: 5 }),
         getLetters(userId!, 'locked'),
-        getUserEmail(),
       ]);
       setEntries(e);
       setPendingCount(letters.length);
-      if (email) setUserName(email.split('@')[0]);
+      if (!nickname) setShowNicknamePrompt(true);
 
       const today = new Date().toISOString().split('T')[0];
       setTodayEntry(e.find(entry => entry.createdAt.startsWith(today)) || null);
@@ -48,11 +48,42 @@ export default function DashboardPage() {
     ? (entries.reduce((sum, e) => sum + e.moodScore, 0) / entries.length).toFixed(1)
     : '--';
 
+  async function handleSetNickname() {
+    if (nicknameInput.trim()) {
+      await updateNickname(nicknameInput.trim());
+    }
+    setShowNicknamePrompt(false);
+  }
+
   return (
     <div className="space-y-5 pb-6">
+      {showNicknamePrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 px-6">
+          <div className="bg-card rounded-2xl p-6 w-full max-w-xs shadow-lg">
+            <h2 className="text-lg font-semibold text-center font-serif mb-1">给自己取个名字吧</h2>
+            <p className="text-xs text-muted text-center mb-4">可以是昵称、花名，或任何你喜欢的称呼</p>
+            <input
+              type="text"
+              value={nicknameInput}
+              onChange={(e) => setNicknameInput(e.target.value)}
+              className="w-full px-4 py-3 border border-border rounded-xl bg-background text-base text-center"
+              placeholder="比如：小半、阿晴、匿名树洞…"
+              maxLength={20}
+              autoFocus
+            />
+            <button
+              onClick={handleSetNickname}
+              className="w-full mt-3 py-2.5 bg-primary text-white rounded-xl text-sm"
+            >
+              {nicknameInput.trim() ? '就叫这个' : '先跳过'}
+            </button>
+          </div>
+        </div>
+      )}
+
       <div>
         <h1 className="text-xl font-semibold font-serif">
-          {userName ? `${userName}，你好` : '你好'}
+          {nickname ? `${nickname}，你好` : '你好'}
         </h1>
         <p className="text-xs text-muted mt-1">{dateStr}</p>
       </div>
