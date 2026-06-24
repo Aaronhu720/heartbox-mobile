@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/lib/AuthContext';
 
 export default function RegisterPage() {
@@ -82,10 +82,6 @@ export default function RegisterPage() {
           </p>
         </form>
 
-        <p className="text-center text-sm text-muted mt-6">
-          已有账号？{' '}
-          <Link to="/login" className="text-primary">登录</Link>
-        </p>
       </div>
     </div>
   );
